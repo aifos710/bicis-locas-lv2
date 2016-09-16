@@ -1,35 +1,77 @@
 function validateForm(){
-    var x = document.getElementById("name").value;
-    var d = document.getElementById("lastname").value;
-    var cuadroNegro = document.getElementsByClassName("input-box")[2];
-    if (x, d == null || x, d == "") {
-        alert("Datos requeridos");
-        return false;
-    };
-    //password
-    var email = document.getElementById("input-email").value;
-    var expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        if (!expr.test(email) ){
-        alert("Error: La dirección de correo " + email + " no es valida.");
-    }
+    var lastname = document.getElementById("lastname").value;
+	var email = document.getElementById("input-email").value;
+	var password = document.getElementById("input-password").value;
+	var name = document.getElementById("name").value;
+	var form = document.getElementsByClassName("form-control").value;
 
-    var pass = document.getElementById("input-password").value;
-        if(pass.length < 5 ){
-            alert("Contraseña  debe tener al menos 6 caracteres");
-        }else if(pass == "123456" || pass =="password" || pass == "098754"){
-            alert("Ingresar contraseña valida");
+    if(name == null || name.length == 0 || /^\s+$/.test(name)){
+        var span = document.createElement("span");
+        var referencia= document.getElementById("name");
+        var father=referencia.parentNode;
+        father.insertBefore(span,referencia);
+        var texto = document.createTextNode("Ingresar su nombre");
+        span.appendChild(texto);
+        return span;
+    }   else {
+       var m = /^[a-zA-Z]*$/;
+       if(!name.search(m)) {
+            console.log("letra")
+            m = /[a-z]/g;
+        }    
+        if(!name.search(m)){
+            var span = document.createElement("span");
+            var referencia= document.getElementById("name");
+            var father=referencia.parentNode;
+            father.insertBefore(span,referencia);
+            var texto = document.createTextNode("La primera letra debe ser maýuscula");
+            span.appendChild(texto);
+            return span;
         }
-    var bici = document.getElementsByTagName("select")[0].value;
-    if ( bici == 0){
-            alert("Seleccionar tu tipo de bici");
     }
 
-    if (d.charAt(0) == d.charAt(0).toLowerCase() || x.charAt(0) == x.charAt(0).toLowerCase()){
-       alert("La primera letra debe ser Mayuscula");
+    if(lastname == null || lastname.length == 0 || /^\s+$/.test(lastname)) {
+        var span = document.createElement("span");
+        var referencia= document.getElementById("lastname");
+        var father=referencia.parentNode;
+        father.insertBefore(span,referencia);
+        var texto = document.createTextNode("Ingresar Apellido");
+        span.appendChild(texto);
+        return span;
+    } else {
+       var n = /^[a-zA-Z]*$/;
+       if(!lastname.search(n)) {
+            console.log("letra")
+            n = /[a-z]/g;
+        }    
+        if(!lastname.search(n)){
+            var span = document.createElement("span");
+            var referencia= document.getElementById("lastname");
+            var father=referencia.parentNode;
+            father.insertBefore(span,referencia);
+            var texto = document.createTextNode("La primera letra debe ser maýuscula");
+            span.appendChild(texto);
+            return span;
+        }
     }
-    else{
-        return true;
-    }
+
+    if(!(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(email))) {
+        var span = document.createElement("span");
+        var referencia= document.getElementById("input-email");
+        var father=referencia.parentNode;
+        father.insertBefore(span,referencia);
+        var texto = document.createTextNode("Verificar su email");
+        span.appendChild(texto);
+        return span;
+    } else if( password == null || password.length <= 6 || password == "password" || password == 123456 || password == 098754 || /^\s+$/.test(password) ) {
+        var span = document.createElement("span");
+        var referencia= document.getElementById("input-password");
+        var father=referencia.parentNode;
+        father.insertBefore(span,referencia);
+        var texto = document.createTextNode("Ingresar contraseña válida");
+        span.appendChild(texto);
+        return span;
+    } 
 }
 
 
